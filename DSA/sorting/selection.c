@@ -2,6 +2,7 @@
 
 void selectiionSort(int *arr,int n)
 {
+    //hello?
     int temp,pos=0,minIndex,min=arr[0];
     while(pos<n)
     {
