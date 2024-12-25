@@ -1,143 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void singleLongest(int** arr,int n,int m,int mem[n][m],int i,int j,int depth,int* path)
+int path;
+void singleLongest(int** arr,int n,int m,int **mem,int x,int y)
 {
-    int check=0;
-     if(i+1<n && arr[i+1][j]>arr[i][j])
-    {
-        if(mem[i+1][j]==1)
-        {
+   int dir[4][2]={{1,0},{0,1},{-1,0},{0,-1}};
+   int newRow,newCol,check=0;
+   for(int i=0;i<4;i++){
+        newRow=x+dir[i][0];
+        newCol=y+dir[i][1];
+        if(newRow>=0 && newRow < n && newCol >=0 && newCol < m && arr[newRow][newCol]>arr[x][y]){
             check=1;
-            singleLongest(arr,n,m,mem,i+1,j,depth+1,path);
-            if((*path)-(depth-1)>mem[i][j])
-            {
-                mem[i][j]=(*path)-(depth-1);
+            if(mem[newRow][newCol]==0){
+                singleLongest(arr,n,m,mem,newRow,newCol);
+            }
+            if(mem[x][y]<mem[newRow][newCol]+1){
+                mem[x][y]=mem[newRow][newCol]+1;
+                if(mem[x][y]>path){
+                    path=mem[x][y];
+                }
             }
         }
-        if(mem[i+1][j]>1)
-        {
-            if(mem[i+1][j]+1>mem[i][j])
-            {
-                mem[i][j]=mem[i+1][j]+1;
-                if(mem[i+1][j]+depth>*path){
-                *path=mem[i+1][j]+depth;}
-            }
-        }
+   }
+   if(check==0){
+    mem[x][y]=1;
+    if(1>path){
+        path=1;
     }
-    if(j+1<m && arr[i][j+1]>arr[i][j])
-    {
-        if(mem[i][j+1]==1)
-        {
-            check=1;
-            singleLongest(arr,n,m,mem,i,j+1,depth+1,path);
-            if((*path)-(depth-1)>mem[i][j])
-    {
-        mem[i][j]=(*path)-(depth-1);
-    }
-        }
-        if(mem[i][j+1]>1)
-        {
-            // printf("%d %d",mem[i][j],mem[i][j+1]);
-            if(mem[i][j+1]+1>mem[i][j])
-            {
-                mem[i][j]=mem[i][j+1]+1;
-                if(mem[i][j+1]+depth>*path){
-                *path=mem[i][j+1]+depth;}
-            }
-        }
-    }
-    if(i-1>=0 && arr[i-1][j]>arr[i][j])
-    {
-        if(mem[i-1][j]==1)
-        {
-            check=1;
-            singleLongest(arr,n,m,mem,i-1,j,depth+1,path);
-            if((*path)-(depth-1)>mem[i][j])
-    {
-        mem[i][j]=(*path)-(depth-1);
-    }
-        }
-        if(mem[i-1][j]>1)
-        {
-            if(mem[i-1][j]+1>mem[i][j])
-            {
-                mem[i][j]=mem[i-1][j]+1;
-                if(mem[i-1][j]+depth>*path){
-                *path=mem[i-1][j]+depth;}
-            }
-        }
-    }
-    if(j-1>=0 && arr[i][j-1]>arr[i][j])
-    {
-        if(mem[i][j-1]==1)
-        {
-            check=1;
-            singleLongest(arr,n,m,mem,i,j-1,depth+1,path);
-            if((*path)-(depth-1)>mem[i][j])
-    {
-        mem[i][j]=(*path)-(depth-1);
-    }
-        }
-        if(mem[i][j-1]>1)
-        {
-            if(mem[i][j-1]+1>mem[i][j])
-            {
-                mem[i][j]=mem[i][j-1]+1;
-                if( mem[i][j-1]+depth>*path){
-                *path= mem[i][j-1]+depth;}
-            }
-        }
-    }
-    if(check==0)
-    {
-        // if(depth>*path)
-        {
-            *path=depth;
-        }
-    }
-    // if((*path)-(depth-1)>mem[i][j])
-    // {
-    //     mem[i][j]=(*path)-(depth-1);
-    // }
+   }
 }
-
-int longestIncreasingPath(int** arr, int n, int* matrixColSize) 
-{
+int longestIncreasingPath(int** arr, int n, int* matrixColSize) {
+    path =0;
     int m=*matrixColSize; 
-    int mem[n][m];
-    int path=0,pathmax=0;
-    for (int i = 0; i < n; i++) 
-    {
-        for (int j = 0; j < m; j++) 
-        {
-            mem[i][j]=1;
-        }
+    int **mem = (int**)calloc(n, sizeof(int*));
+    for (int i = 0; i < n; i++) {
+    mem[i] = (int*)calloc(m, sizeof(int));
     }
-    for (int i = 0; i < n; i++) 
-    {
-        for (int j = 0; j < m; j++) 
-        {
-            if(mem[i][j]==1)
-            {
-                path=0;
-                singleLongest(arr,n,m,mem,i,j,1,&path);
-            }
-        }
-    }
-    // printf("%d\n",pathmax);
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            printf("%d ",mem[i][j]);
-            if(mem[i][j]>pathmax)
-            {
-                pathmax=mem[i][j];
+            if(mem[i][j]==0){
+                singleLongest(arr,n,m,mem,i,j);
             }
         }
-        printf("\n");
     }
-    return pathmax;
-
+    return path;
 }
 
 void main()
