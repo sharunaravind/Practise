@@ -2,16 +2,15 @@
 #include <stdlib.h>
 
 int path;
-void singleLongest(int** arr,int n,int m,int **mem,int x,int y)
+void singleLongest(int** arr,int n,int m,int mem[n][m],int x,int y)
 {
    int dir[4][2]={{1,0},{0,1},{-1,0},{0,-1}};
-   int newRow,newCol,check=0;
+   int newRow,newCol;
    for(int i=0;i<4;i++){
         newRow=x+dir[i][0];
         newCol=y+dir[i][1];
         if(newRow>=0 && newRow < n && newCol >=0 && newCol < m && arr[newRow][newCol]>arr[x][y]){
-            check=1;
-            if(mem[newRow][newCol]==0){
+            if(mem[newRow][newCol]==1){
                 singleLongest(arr,n,m,mem,newRow,newCol);
             }
             if(mem[x][y]<mem[newRow][newCol]+1){
@@ -22,23 +21,19 @@ void singleLongest(int** arr,int n,int m,int **mem,int x,int y)
             }
         }
    }
-   if(check==0){
-    mem[x][y]=1;
-    if(1>path){
-        path=1;
-    }
-   }
 }
 int longestIncreasingPath(int** arr, int n, int* matrixColSize) {
-    path =0;
+    path = 1;
     int m=*matrixColSize; 
-    int **mem = (int**)calloc(n, sizeof(int*));
+    int mem[n][m];
     for (int i = 0; i < n; i++) {
-    mem[i] = (int*)calloc(m, sizeof(int));
+        for (int j = 0; j < m; j++) {
+            mem[i][j]=1;
+        }
     }
     for (int i = 0; i < n; i++) {
         for (int j = 0; j < m; j++) {
-            if(mem[i][j]==0){
+            if(mem[i][j]==1){
                 singleLongest(arr,n,m,mem,i,j);
             }
         }
