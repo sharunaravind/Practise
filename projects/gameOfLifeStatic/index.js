@@ -4,8 +4,8 @@ const clear = document.getElementById("clear");
 const resetMat = document.getElementById("reset");
 const lines = document.getElementById("lines");
 const speed = document.getElementById("speed");
-const basicStart1 = [100,100,99,100,101,100,101,101,100,99];
-let speedValue =  Math.pow(15,1.5);;
+const basicStart1 = [100, 100, 99, 100, 101, 100, 101, 101, 100, 99];
+let speedValue = Math.pow(15, 1.5);
 let drag = false;
 let dir = [
   [-1, -1],
@@ -45,20 +45,47 @@ for (let i = 0; i < rows; i++) {
 }
 
 const cellArray = document.querySelectorAll(".cell");
-grid.scrollLeft = 100;
-grid.scrollTop = 600;
-function startSeq(array) {
-    clearMatrix();
-    for(let i=0;i<array.length-1;i+=2)
-    {
-        let currRow=basicStart1[i];
-        let currCol=basicStart1[i+1];
-        console.log(currRow,currCol);
-        mat[currRow][currCol] = 1;
-        cellArray[currRow * rows + currCol].classList.toggle("alive");
-    }
+function centerstart() {
+  const elementSize = 10;
+  const targetRow = 100 - 1;
+  const targetCol = 100 - 1;
+  const elementCenterX = targetCol * elementSize + elementSize / 2;
+  const elementCenterY = targetRow * elementSize + elementSize / 2;
+  const containerWidth = grid.offsetWidth;
+  const containerHeight = grid.offsetHeight;
+
+  const containerCenterX = containerWidth / 2;
+  const containerCenterY = containerHeight / 2;
+
+  const scrollLeft = elementCenterX - containerCenterX;
+  const scrollTop = elementCenterY - containerCenterY;
+
+  grid.scrollLeft = scrollLeft;
+  grid.scrollTop = scrollTop;
 }
+
+function startSeq(array) {
+  clearMatrix();
+  for (let i = 0; i < array.length - 1; i += 2) {
+    let currRow = basicStart1[i];
+    let currCol = basicStart1[i + 1];
+    console.log(currRow, currCol);
+    mat[currRow][currCol] = 1;
+    cellArray[currRow * rows + currCol].classList.toggle("alive");
+  }
+}
+centerstart();
 startSeq(basicStart1);
+
+let resizeTimer;
+
+window.addEventListener("resize", () => {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {
+    centerstart();
+  }, 0);
+});
+
 {
   //Event for click and drag
 
@@ -95,11 +122,11 @@ function changeCell(cell, number) {
   cell.classList.toggle("alive");
 }
 
-function addBorder(){
-    // cellArray.forEach((cell)=>{
-    //     cell.classList.toggle('linesOn')
-    // })
-    grid.classList.toggle('linesOn');
+function addBorder() {
+  // cellArray.forEach((cell)=>{
+  //     cell.classList.toggle('linesOn')
+  // })
+  grid.classList.toggle("linesOn");
 }
 
 function next() {
@@ -150,11 +177,11 @@ start.addEventListener("click", (event) => {
   event.preventDefault();
   if (running) {
     running = false;
-    start.innerHTML="&#9658;"
+    start.innerHTML = "&#9658;";
     return;
   }
   running = true;
-  start.innerHTML='\u23F8'
+  start.innerHTML = "\u23F8";
   function nextGeneration() {
     if (!running) return;
     next();
@@ -165,24 +192,9 @@ start.addEventListener("click", (event) => {
 
 speed.addEventListener("change", (event) => {
   event.preventDefault();
-  let value = (500 - speed.value);
-  speedValue =  Math.pow(value,1.5);
+  let value = 500 - speed.value;
+  speedValue = Math.pow(value, 1.5);
 });
-
-// start.addEventListener("click", (event) => {
-//   event.preventDefault();
-//   if (running) {
-//     running = false;
-//     return;
-//   }
-//   running = true;
-//   function nextGeneration() {
-//     if (!running) return;
-//     next();
-//     setTimeout(nextGeneration, 20);
-//   }
-//   nextGeneration();
-// });
 
 clear.addEventListener("click", (event) => {
   event.preventDefault();
@@ -190,24 +202,23 @@ clear.addEventListener("click", (event) => {
 });
 resetMat.addEventListener("click", (event) => {
   event.preventDefault();
-    startSeq(basicStart1);
+  startSeq(basicStart1);
 });
 lines.addEventListener("click", (event) => {
   event.preventDefault();
   addBorder();
 });
 
-function clearMatrix()
-{
-    for (let i = 0; i < rows; i++) {
-        for (let j = 0; j < cols; j++) {
-          matTemp[i][j] = 0;
-          if (mat[i][j] === 1) {
-            mat[i][j] = 0;
-            cellArray[i * rows + j].classList.toggle("alive");
-          }
-        }
+function clearMatrix() {
+  for (let i = 0; i < rows; i++) {
+    for (let j = 0; j < cols; j++) {
+      matTemp[i][j] = 0;
+      if (mat[i][j] === 1) {
+        mat[i][j] = 0;
+        cellArray[i * rows + j].classList.toggle("alive");
       }
+    }
+  }
 }
 
 function benchmark() {

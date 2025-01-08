@@ -1,0 +1,45 @@
+{
+  "name": "gameoflife",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder"
+  },
+  "keywords": [],
+  "author": "Shaun The Sheep",
+  "license": "ISC",
+  "description": "Conway's Game of Life",
+  "devDependencies": {
+    "electron": "^33.3.1",
+    "electron-packager": "^17.1.2",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.shaunthesheep.gameoflife",
+    "productName": "Game of Life",
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "scripts.js",
+      "node_modules"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
