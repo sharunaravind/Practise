@@ -1,6 +1,11 @@
 const grid = document.getElementById("canvas");
 const start = document.getElementById("start");
 const clear = document.getElementById("clear");
+const resetMat = document.getElementById("reset");
+const lines = document.getElementById("lines");
+const speed = document.getElementById("speed");
+const basicStart1 = [100,100,99,100,101,100,101,101,100,99];
+let speedValue =  Math.pow(15,1.5);;
 let drag = false;
 let dir = [
   [-1, -1],
@@ -38,24 +43,22 @@ for (let i = 0; i < rows; i++) {
     grid.appendChild(cell);
   }
 }
+
 const cellArray = document.querySelectorAll(".cell");
-grid.scrollLeft = 320;
-grid.scrollTop = 720;
-const startRow = 100;
-const startCol = 100;
-function startSeq() {
-  mat[startRow][startCol] = 1;
-  cellArray[startRow * rows + startCol].classList.toggle("alive");
-  mat[startRow + 1][startCol] = 1;
-  cellArray[(startRow + 1) * rows + startCol].classList.toggle("alive");
-  mat[startRow - 1][startCol] = 1;
-  cellArray[(startRow - 1) * rows + startCol].classList.toggle("alive");
-  mat[startRow][startCol - 1] = 1;
-  cellArray[startRow * rows + (startCol - 1)].classList.toggle("alive");
-  mat[startRow + 1][startCol + 1] = 1;
-  cellArray[(startRow + 1) * rows + (startCol + 1)].classList.toggle("alive");
+grid.scrollLeft = 100;
+grid.scrollTop = 600;
+function startSeq(array) {
+    clearMatrix();
+    for(let i=0;i<array.length-1;i+=2)
+    {
+        let currRow=basicStart1[i];
+        let currCol=basicStart1[i+1];
+        console.log(currRow,currCol);
+        mat[currRow][currCol] = 1;
+        cellArray[currRow * rows + currCol].classList.toggle("alive");
+    }
 }
-startSeq();
+startSeq(basicStart1);
 {
   //Event for click and drag
 
@@ -90,6 +93,13 @@ function toggleCell(cell) {
 
 function changeCell(cell, number) {
   cell.classList.toggle("alive");
+}
+
+function addBorder(){
+    // cellArray.forEach((cell)=>{
+    //     cell.classList.toggle('linesOn')
+    // })
+    grid.classList.toggle('linesOn');
 }
 
 function next() {
@@ -140,29 +150,65 @@ start.addEventListener("click", (event) => {
   event.preventDefault();
   if (running) {
     running = false;
+    start.innerHTML="&#9658;"
     return;
   }
   running = true;
+  start.innerHTML='\u23F8'
   function nextGeneration() {
     if (!running) return;
     next();
-    setTimeout(nextGeneration, 20);
+    setTimeout(nextGeneration, speedValue);
   }
   nextGeneration();
 });
 
+speed.addEventListener("change", (event) => {
+  event.preventDefault();
+  let value = (500 - speed.value);
+  speedValue =  Math.pow(value,1.5);
+});
+
+// start.addEventListener("click", (event) => {
+//   event.preventDefault();
+//   if (running) {
+//     running = false;
+//     return;
+//   }
+//   running = true;
+//   function nextGeneration() {
+//     if (!running) return;
+//     next();
+//     setTimeout(nextGeneration, 20);
+//   }
+//   nextGeneration();
+// });
+
 clear.addEventListener("click", (event) => {
   event.preventDefault();
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < cols; j++) {
-      matTemp[i][j] = 0;
-      if (mat[i][j] === 1) {
-        mat[i][j] = 0;
-        cellArray[i * rows + j].classList.toggle("alive");
-      }
-    }
-  }
+  clearMatrix();
 });
+resetMat.addEventListener("click", (event) => {
+  event.preventDefault();
+    startSeq(basicStart1);
+});
+lines.addEventListener("click", (event) => {
+  event.preventDefault();
+  addBorder();
+});
+
+function clearMatrix()
+{
+    for (let i = 0; i < rows; i++) {
+        for (let j = 0; j < cols; j++) {
+          matTemp[i][j] = 0;
+          if (mat[i][j] === 1) {
+            mat[i][j] = 0;
+            cellArray[i * rows + j].classList.toggle("alive");
+          }
+        }
+      }
+}
 
 function benchmark() {
   const startTime = performance.now();
