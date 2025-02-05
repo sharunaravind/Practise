@@ -12,6 +12,7 @@ public class q7 {
         for(int i=0;i<100;i++)
         {
             arr[i]=p/q;
+
             p=(p%q)*10;
         }
         int[] numbers = new int[10];
