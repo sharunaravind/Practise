@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="FormOne">
-  <grid id="27dc6" binding="SavePanel" layout-manager="GridLayoutManager" row-count="6" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="SavePanel" layout-manager="GridLayoutManager" row-count="8" column-count="6" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="1093" height="917"/>
     </constraints>
     <properties>
-      <background color="-420396"/>
-      <font size="24"/>
+      <background color="-16777216"/>
+      <font size="26"/>
     </properties>
     <border type="none"/>
     <children>
@@ -16,18 +16,19 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Name"/>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Order Date"/>
         </properties>
       </component>
-      <component id="ccf78" class="javax.swing.JTextField" binding="tfName">
+      <component id="ccf78" class="javax.swing.JTextField" binding="tfDate">
         <constraints>
           <grid row="1" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <font size="24"/>
+          <font size="26"/>
         </properties>
       </component>
       <component id="f98e2" class="javax.swing.JLabel">
@@ -35,45 +36,28 @@
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Email"/>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Total Amount"/>
         </properties>
       </component>
-      <component id="84151" class="javax.swing.JTextField" binding="tfEmail">
+      <component id="84151" class="javax.swing.JTextField" binding="tfTotal">
         <constraints>
           <grid row="2" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <font size="24"/>
-        </properties>
-      </component>
-      <component id="21273" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font size="24"/>
-          <text value="Salary"/>
-        </properties>
-      </component>
-      <component id="1db62" class="javax.swing.JTextField" binding="tfSalary">
-        <constraints>
-          <grid row="3" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="-1"/>
-          </grid>
-        </constraints>
-        <properties>
-          <font size="24"/>
+          <font size="26"/>
+          <foreground color="-65549"/>
         </properties>
       </component>
       <component id="54605" class="javax.swing.JButton" binding="btnSave">
         <constraints>
-          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
+          <font size="26"/>
           <text value="Save"/>
         </properties>
       </component>
@@ -82,64 +66,128 @@
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Id"/>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Order ID"/>
         </properties>
       </component>
-      <component id="9e2e9" class="javax.swing.JTextField" binding="tfId">
+      <component id="9e2e9" class="javax.swing.JTextField" binding="tfOrderId">
         <constraints>
           <grid row="0" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
-          <font size="24"/>
+          <font size="26"/>
           <text value=""/>
         </properties>
       </component>
-      <component id="5de6e" class="javax.swing.JButton" binding="button1" default-binding="true">
+      <component id="5de6e" class="javax.swing.JButton" binding="btnDelete">
         <constraints>
-          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Button"/>
+          <font size="26"/>
+          <text value="Delete"/>
         </properties>
       </component>
-      <component id="32815" class="javax.swing.JButton" binding="button2" default-binding="true">
+      <component id="32815" class="javax.swing.JButton" binding="btnUpdate">
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Button"/>
+          <font size="26"/>
+          <text value="Update"/>
         </properties>
       </component>
-      <component id="8e457" class="javax.swing.JButton" binding="button3" default-binding="true">
+      <component id="8e457" class="javax.swing.JButton" binding="btnSearch">
         <constraints>
-          <grid row="5" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
-          <text value="Button"/>
+          <font size="26"/>
+          <text value="Search"/>
         </properties>
       </component>
       <component id="6bce1" class="javax.swing.JButton" binding="btnShow">
         <constraints>
-          <grid row="5" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="7" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <font size="24"/>
+          <font size="26"/>
           <text value="Show All"/>
         </properties>
       </component>
       <component id="60bc1" class="javax.swing.JTextArea" binding="tfResult">
         <constraints>
-          <grid row="4" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+          <grid row="6" column="1" row-span="1" col-span="5" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <font size="26"/>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="e5b3b" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="6" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Order Details:"/>
+        </properties>
+      </component>
+      <component id="6f6c9" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Product ID"/>
+        </properties>
+      </component>
+      <component id="b85cf" class="javax.swing.JTextField" binding="tfProductId">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="26"/>
+        </properties>
+      </component>
+      <component id="3fb07" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Quantity"/>
+        </properties>
+      </component>
+      <component id="ace12" class="javax.swing.JTextField" binding="tfQuantity">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <font size="26"/>
+        </properties>
+      </component>
+      <component id="7b3d2" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <font size="26"/>
+          <foreground color="-65549"/>
+          <text value="Result :"/>
+        </properties>
       </component>
     </children>
   </grid>
