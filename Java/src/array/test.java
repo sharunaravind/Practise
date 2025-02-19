@@ -14,7 +14,7 @@ public class test {
         System.out.println(s1.pop());
         Stack s2 = new Stack(10);
         s2.push(10);
-        s2.push(9384483419);
+        s2.push(9384);
         System.out.println(s1.isEmpty());
 
     }

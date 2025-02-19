@@ -9,6 +9,7 @@
       <sourceFolder url="file://$MODULE_DIR$/JDBC" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test1" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/array" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Worksheets" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
