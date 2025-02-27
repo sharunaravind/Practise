@@ -11,7 +11,6 @@ public class q1
             array[i-1] = new Circle(i);
             array[i-1].display();
         }
-
     }
 }
 class Circle
