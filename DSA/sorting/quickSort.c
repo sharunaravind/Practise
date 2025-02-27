@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <limits.h>
 #include <stdlib.h>
-#include <time.h>
+#define _GNU_SOURCE
+#include <time.h> // Ignore IntelliSense error: CLOCK_MONOTONIC
 
 int partition(int* arr,int start,int end)
 {
@@ -48,7 +49,7 @@ int* createArray(int size) {
     return arr;
 }
 
-void main()
+int main()
 {
     
     int n = 2000000;
@@ -56,7 +57,7 @@ void main()
     int* array = createArray(n);
     array[n]=INT_MAX;
     struct timespec start, end;
-    clock_gettime(CLOCK_MONOTONIC, &start);
+    clock_gettime(CLOCK_MONOTONIC, &start); // NOLINT
     quickSort(array,0,n-2);
     clock_gettime(CLOCK_MONOTONIC, &end);
     double time_taken = (end.tv_sec - start.tv_sec) +  ((end.tv_nsec - start.tv_nsec) / 1.0e9);
@@ -68,5 +69,6 @@ void main()
     // printf("\n");
     // }   
     printf("Time: %.9f s\n", time_taken);
+    return 0;
     
 }
