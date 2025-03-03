@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 void insertionsort(int *arr,int n)
 {
@@ -26,12 +28,31 @@ void insertionsort(int *arr,int n)
     }
 }
 
+int* createArray(int size) {
+    int* arr = (int*)malloc(size * sizeof(int));
+    if (!arr) return NULL; 
+    srand(time(NULL)); 
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 100000;
+        // printf("%d ",arr[i]);
+    }
+    return arr;
+}
 
-void main()
+int main() //NOLINT
 {
-    int arr[]={12,78,32,5,4,54,4,24};
-    int n=sizeof(arr)/sizeof(int);
+    int n = 100000;
+    int* arr = createArray(n);
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start); // NOLINT
     insertionsort(arr,n);
-    printf("\n");
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = (end.tv_sec - start.tv_sec) +  ((end.tv_nsec - start.tv_nsec) / 1.0e9);
+    // for(int i=0;i<n;i++)
+    // {
+    //     printf("%d ",arr[i]);
+    // }
+    printf("Time: %.9f s\n", time_taken);
+    return 0;
 
 }

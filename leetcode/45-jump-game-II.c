@@ -1,39 +1,33 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <limits.h>
 
 int jump(int* arr,int n)
 {
-    int max=INT_MIN;
-    int maxPos;
-    // int i=0;
-    int jump=0;
-    int curr=0;
-    int currSize=0;
-    while(curr<n)
-    {
-        currSize=arr[curr];
-        for (int i = curr+1; i <= curr+currSize; i++)
+    if(n==1) return 0;
+    int value = 0;
+    int i=0,jump=0,maxReach,maxVal=INT_MIN,index;
+    while(i<n)
+    {   
+        jump++;
+        maxReach=i+arr[i];
+        if(maxReach>=n-1) return jump;
+        while(value<maxReach)
         {
-            if((arr[i]+i)>=n) 
+            value++;
+            if((arr[value]+value)>=maxVal)
             {
-                maxPos=n;
-                break;  //if it can reach the end then we can stop
-            }
-            else if((arr[i]+i)>max){
-                max=arr[i]+i;
-                maxPos=i;
+                maxVal=arr[value]+value;
+                index=value;
             }
         }
-        jump++;
-        curr=maxPos;
-    }
-    return jump;
+        i=index;
+    } 
+    return jump;      
 }
 
-void main()
+void main() //NOLINT
 {
-    int array[] = {1,4,4};
+    int array[] = {2,3,0,1,4};
     int n = sizeof(array)/sizeof(int);
     printf("%d\n",jump(array,n));
 }

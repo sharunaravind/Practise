@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <time.h>
 
 struct bucket{
     struct node *head;
@@ -50,12 +51,12 @@ void outBucket(int *arr,int n,struct bucket **buckets)
             {
                 arr[count]=temp->data;
                 count++;
-                printf("%d ",temp->data);
+                // printf("%d ",temp->data);
                 temp=temp->next;
             }
         }
     }
-    printf("\n");
+    // printf("\n"); //this printf is for gap between each iteration like digit place wise
 }
 
 void purge(struct bucket **buckets)
@@ -78,7 +79,18 @@ void purge(struct bucket **buckets)
     }
 }
 
-void main()
+int* createArray(int size) {
+    int* arr = (int*)malloc(size * sizeof(int));
+    if (!arr) return NULL; 
+    srand(time(NULL)); 
+    for (int i = 0; i < size; i++) {
+        arr[i] = rand() % 100;
+        // printf("%d ",arr[i]);
+    }
+    return arr;
+}
+
+int main()
 {
     struct bucket *buckets[10];
     for(int i=0;i<10;i++)
@@ -87,17 +99,23 @@ void main()
         buckets[i]->head=NULL;
         buckets[i]->tail=NULL;
     }
-    int arr[]={12,43,54,401,43,1,3,94,16};
-    int n=sizeof(arr)/sizeof(int);
-    int exp;
+    int n=2000000;
+    int* arr = createArray(n);
+    int exp=1;
+    struct timespec start, end;
+    clock_gettime(CLOCK_MONOTONIC, &start);
     //this should not be three but the number of digits in the largest number in the array
     for(int i=0;i<3;i++)
     {
-        exp=pow(10,i);
+        // exp = pow(10,i);
         inBucket(arr,n,buckets,exp);
         outBucket(arr,n,buckets);
         purge(buckets);
+        exp *=10;
     }
-    
-    printf("\n");
+    clock_gettime(CLOCK_MONOTONIC, &end);
+    double time_taken = (end.tv_sec - start.tv_sec) +  ((end.tv_nsec - start.tv_nsec) / 1.0e9);
+    printf("Time: %.9f s\n", time_taken);
+    return 0;
+    // printf("\n");
 }

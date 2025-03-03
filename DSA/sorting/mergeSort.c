@@ -79,11 +79,11 @@ int main()
     mergeSort(0,n,array);
     clock_gettime(CLOCK_MONOTONIC, &end);
     double time_taken = (end.tv_sec - start.tv_sec) +  ((end.tv_nsec - start.tv_nsec) / 1.0e9);
+    printf("Time: %.9f s\n", time_taken);
     // for(int i=0;i<n;i++)
     // {
     //     printf("%d ",array[i]);
     // }
-    printf("Time: %.9f s\n", time_taken);
     return 0;
 }
 
