@@ -4,18 +4,14 @@
 int jump(int* arr,int n)
 {
     if(n==1) return 0;
-    int value = 0;
-    int i=0,jump=0,maxReach,maxVal=INT_MIN,index;
-    while(i<n)
-    {   
+    int i=0,jump=0,maxReach,maxVal=INT_MIN,index,value = 0;
+    while(i<n){   
         jump++;
         maxReach=i+arr[i];
         if(maxReach>=n-1) return jump;
-        while(value<maxReach)
-        {
+        while(value<maxReach){
             value++;
-            if((arr[value]+value)>=maxVal)
-            {
+            if((arr[value]+value)>=maxVal){
                 maxVal=arr[value]+value;
                 index=value;
             }

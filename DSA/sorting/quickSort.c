@@ -45,7 +45,6 @@ int* createArray(int size) {
         arr[i] = rand() % 100000;
         // printf("%d ",arr[i]);
     }
-    printf("\n\n");
     return arr;
 }
 
