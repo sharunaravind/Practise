@@ -72,8 +72,7 @@ struct ListNode* merge(struct ListNode** head1,struct ListNode** head2){
     return newHead;
 }
 
-void heapify(struct heapNode* array,int n,int i)
-{
+void heapify(struct heapNode* array,int n,int i){
     int leftchild = (2*i)+1;
     int rightchild =(2*i)+2;
     int min=i;
@@ -92,74 +91,132 @@ void heapify(struct heapNode* array,int n,int i)
 
 struct ListNode* mergeKLists(struct ListNode** lists, int n) {
     struct heapNode heap[n];
+    struct ListNode* final = NULL;
     for(int i=0;i<n;i++)
     {
         heap[i].start=lists[i];
         if(heap[i].start != NULL) heap[i].first=heap[i].start->val;
         else if(heap[i].start == NULL) heap[i].first = INT_MAX;
     }
-    heapify(heap,n,0);
-
-
+    for(int i=((2*n)-1);i>=0;i--)
+    {
+        heapify(heap,n,i);
+    }
+    while(heap[0].first!=INT_MAX)
+    {
+        insert(&final,heap[0].first);
+        if(heap[0].start->next==NULL) heap[0].first=INT_MAX;
+        else{
+            heap[0].start=heap[0].start->next;
+            heap[0].first=heap[0].start->val;
+        }
+        heapify(heap,n,0);
+    }
+    return final;
 }
 
 int main()
 {
-    int n=5;
+    int n=10;
     struct ListNode** array = (struct ListNode**)malloc(n*sizeof(struct ListNode*));
     for(int i=0;i<n;i++)
     {
         array[i]=(struct ListNode*)malloc(5*sizeof(struct ListNode));
     }
-
-    struct ListNode* head = NULL;
-    insert(&head,5);
-    insert(&head,6);
-    insert(&head,7);
-    insert(&head,8);
-    insert(&head,9);
+    struct ListNode* head0 = NULL;
+    insert(&head0, 5);
+    insert(&head0, 15);
+    insert(&head0, 25);
+    insert(&head0, 35);
 
     struct ListNode* head1 = NULL;
-    insert(&head1,1);
-    insert(&head1,2);
-    insert(&head1,3);
-    insert(&head1,4);
-    insert(&head1,5);
+    insert(&head1, 1);
+    insert(&head1, 3);
+    insert(&head1, 5);
+    insert(&head1, 10);
+    insert(&head1, 15);
 
     struct ListNode* head2 = NULL;
-    insert(&head2,10);
-    insert(&head2,20);
-    insert(&head2,30);
-    insert(&head2,40);
-    insert(&head2,50);
+    insert(&head2, 12);
+    insert(&head2, 20);
+    insert(&head2, 30);
+    insert(&head2, 50);
+    insert(&head2, 70);
+    insert(&head2, 90);
 
     struct ListNode* head3 = NULL;
-    insert(&head3,15);
-    insert(&head3,25);
-    insert(&head3,35);
-    insert(&head3,45);
-    insert(&head3,55);
+    insert(&head3, 0);
+    insert(&head3, 4);
+    insert(&head3, 8);
+    insert(&head3, 16);
+    insert(&head3, 32);
+    insert(&head3, 64);
+    insert(&head3, 128);
 
     struct ListNode* head4 = NULL;
-    insert(&head4,3);
-    insert(&head4,6);
-    insert(&head4,9);
-    insert(&head4,12);
-    insert(&head4,15);
+    insert(&head4, 2);
+    insert(&head4, 4);
+    insert(&head4, 6);
+    insert(&head4, 8);
+    insert(&head4, 10);
+    insert(&head4, 20);
+    insert(&head4, 40);
 
     struct ListNode* head5 = NULL;
-    insert(&head5,100);
-    insert(&head5,200);
-    insert(&head5,300);
-    insert(&head5,400);
-    insert(&head5,500);
+    insert(&head5, 3);
+    insert(&head5, 6);
+    insert(&head5, 9);
+    insert(&head5, 12);
+    insert(&head5, 15);
+    insert(&head5, 18);
+    insert(&head5, 21);
+    insert(&head5, 24);
 
-    // display(merge(&head5,&head1));
-    array[0]=head;
-    array[1]=head1;
-    array[2]=head2;
-    array[3]=head3;
-    array[4]=head5;
+    struct ListNode* head6 = NULL;
+    insert(&head6, 7);
+    insert(&head6, 14);
+    insert(&head6, 21);
+    insert(&head6, 28);
+    insert(&head6, 35);
+
+    struct ListNode* head7 = NULL;
+    insert(&head7, 11);
+    insert(&head7, 22);
+    insert(&head7, 33);
+    insert(&head7, 44);
+    insert(&head7, 55);
+    insert(&head7, 66);
+    insert(&head7, 77);
+    insert(&head7, 88);
+
+    struct ListNode* head8 = NULL;
+    insert(&head8, 9);
+    insert(&head8, 18);
+    insert(&head8, 27);
+    insert(&head8, 36);
+    insert(&head8, 45);
+
+    struct ListNode* head9 = NULL;
+    insert(&head9, 13);
+    insert(&head9, 26);
+    insert(&head9, 39);
+    insert(&head9, 52);
+    insert(&head9, 65);
+    insert(&head9, 78);
+    insert(&head9, 91);
+    insert(&head9, 104);
+    insert(&head9, 117);
+
+    array[0] = head0;
+    array[1] = head1;
+    array[2] = head2;
+    array[3] = head3;
+    array[4] = head4;
+    array[5] = head5;
+    array[6] = head6;
+    array[7] = head7;
+    array[8] = head8;
+    array[9] = head9;
 
     display(mergeKLists(array,n));
 
