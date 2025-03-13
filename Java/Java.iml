@@ -10,6 +10,10 @@
       <sourceFolder url="file://$MODULE_DIR$/test1" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/array" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Worksheets" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/MyProject" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dynamicBinding" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Misc" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Rational" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
