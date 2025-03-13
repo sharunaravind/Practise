@@ -8,7 +8,7 @@ char* minWindow(char* s, char* t)
 {
     long slen = strlen(s);
     long tlen= strlen(t);
-    int freq[52],sumarr[52],sum=tlen,min=-1,max=0,minEle,finalMin,finalMax,window=INT_MAX,tempWindow;
+    int freq[52],sumarr[52],sum=tlen,min=-1,max=0,minEle,finalMin,finalMax,window=INT_MAX,tempWindow,queue[slen],front=-1,back=-1;
     for(int i=0;i<52;i++)
     {
         freq[i]=0;
@@ -24,6 +24,8 @@ char* minWindow(char* s, char* t)
         if(freq[currLetter]>0)
         {
             sumarr[currLetter]++;   
+            queue[++back] = i;
+            if (front == -1) front = 0;
             if(sumarr[currLetter]<=freq[currLetter])
             {
                 sum--;
@@ -35,21 +37,38 @@ char* minWindow(char* s, char* t)
             }
             else if(currLetter==minEle && sumarr[currLetter]>freq[currLetter])
             {
-                for(int j=min;j<slen;j++)
-                {
+                // for(int j=min;j<slen;j++)
+                // {
+                //     int currLetter2 = letter(s[j]);
+                //     if(freq[currLetter2]>0)
+                //     {
+                //         if(sumarr[currLetter2]<=freq[currLetter2])
+                //         {
+                //             min=j;
+                //             minEle=currLetter2;
+                //             break;
+                //         }
+                //         else{
+                //             sumarr[currLetter2]--;
+                //         }
+                //     }
+                // }
+                while (front <= back) {
+                    int j = queue[front];  // Get the front index from the queue
+                    
                     int currLetter2 = letter(s[j]);
-                    if(freq[currLetter2]>0)
-                    {
-                        if(sumarr[currLetter2]<=freq[currLetter2])
-                        {
-                            min=j;
-                            minEle=currLetter2;
+                    
+                    if (freq[currLetter2] > 0) {
+                        if (sumarr[currLetter2] <= freq[currLetter2]) {
+                            min = j;
+                            minEle = currLetter2;
                             break;
-                        }
-                        else{
+                        } else {
                             sumarr[currLetter2]--;
                         }
                     }
+                    
+                    front++;  // Remove from queue
                 }
             }
             max=i;
