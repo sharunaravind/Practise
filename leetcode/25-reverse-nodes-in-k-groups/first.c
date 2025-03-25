@@ -40,8 +40,7 @@ void display(struct ListNode* head){
 void reverse(struct ListNode** head,int k){
     struct ListNode *curr=NULL,*next=*head,*nextnext;
     int count=0;
-    while(next!=NULL && count<k)
-    {
+    while(next!=NULL && count<k){
         nextnext=next->next;
         next->next=curr;
         curr=next;
@@ -53,22 +52,18 @@ void reverse(struct ListNode** head,int k){
 struct ListNode* check(struct ListNode* head,int k,struct ListNode** container){
     int count=1;
     struct ListNode* temp =head;
-    while(temp->next!=NULL && count<k)
-    {
+    while(temp->next!=NULL && count<k){
         temp=temp->next;
         count++;
     }
-    if(count==k) 
-    {
+    if(count==k) {
         *container=temp->next;
         return temp;
     }
-    else 
-    {
+    else {
         *container=head->next;
         return head;
     }
-    
 }
 
 struct ListNode* reverseKGroup(struct ListNode* head, int k) 
@@ -77,11 +72,9 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k)
     struct ListNode* final= temphead;
     temphead->next=head;
     struct ListNode *curr=head,*container=head,*tempFree;
-    while(curr!=NULL)
-    {
+    while(curr!=NULL){
         curr=container;
-        if(curr==NULL)
-        {
+        if(curr==NULL){
             tempFree=final;
             final=final->next;
             free(tempFree);
@@ -89,20 +82,16 @@ struct ListNode* reverseKGroup(struct ListNode* head, int k)
         }
         struct ListNode* returnValue = check(curr,k,&container);
         temphead->next=returnValue;
-        if(curr == returnValue)
-        {
+        if(curr == returnValue){
             tempFree=final;
             final=final->next;
             free(tempFree);
             return final;
         }
-        else 
-        {
-            
+        else {
             reverse(&curr,k);
             temphead=curr;
         }
-
     }
     temphead=temphead->next;
     return temphead;
