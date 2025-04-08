@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <limits.h>
 
 void Countingsort(int *arr,int n)
 {
@@ -29,7 +30,7 @@ int* createArray(int size) {
     if (!arr) return NULL; 
     srand(time(NULL)); 
     for (int i = 0; i < size; i++) {
-        arr[i] = rand() % 100000;
+        arr[i] = rand() % 2000000;
         // printf("%d ",arr[i]);
     }
     return arr;
@@ -37,7 +38,7 @@ int* createArray(int size) {
 
 int main() //NOLINT
 {
-    int n = 20000000;
+    int n = 2000000;
     int* arr = createArray(n);
     struct timespec start, end;
     clock_gettime(CLOCK_MONOTONIC, &start); // NOLINT

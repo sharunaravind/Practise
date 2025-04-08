@@ -81,69 +81,93 @@ void helper(struct ListNode** arr,int start,int end)
 }
 
 struct ListNode* mergeKLists(struct ListNode** lists, int n) {
+    if(n==0) return NULL;
     helper(lists,0,n-1);
     return lists[0];
 }
 
-int main()
-{
-    int n=5;
-    struct ListNode** array = (struct ListNode**)malloc(n*sizeof(struct ListNode*));
+// int main()
+// {
+//     int n=5;
+//     struct ListNode** array = (struct ListNode**)malloc(n*sizeof(struct ListNode*));
+//     for(int i=0;i<n;i++)
+//     {
+//         array[i]=(struct ListNode*)malloc(5*sizeof(struct ListNode));
+//     }
+
+//     struct ListNode* head = NULL;
+//     insert(&head,5);
+//     insert(&head,6);
+//     insert(&head,7);
+//     insert(&head,8);
+//     insert(&head,9);
+
+//     struct ListNode* head1 = NULL;
+//     insert(&head1,1);
+//     insert(&head1,2);
+//     insert(&head1,3);
+//     insert(&head1,4);
+//     insert(&head1,5);
+
+//     struct ListNode* head2 = NULL;
+//     insert(&head2,10);
+//     insert(&head2,20);
+//     insert(&head2,30);
+//     insert(&head2,40);
+//     insert(&head2,50);
+
+//     struct ListNode* head3 = NULL;
+//     insert(&head3,15);
+//     insert(&head3,25);
+//     insert(&head3,35);
+//     insert(&head3,45);
+//     insert(&head3,55);
+
+//     struct ListNode* head4 = NULL;
+//     insert(&head4,3);
+//     insert(&head4,6);
+//     insert(&head4,9);
+//     insert(&head4,12);
+//     insert(&head4,15);
+
+//     struct ListNode* head5 = NULL;
+//     insert(&head5,100);
+//     insert(&head5,200);
+//     insert(&head5,300);
+//     insert(&head5,400);
+//     insert(&head5,500);
+
+//     // display(merge(&head5,&head1));
+//     array[0]=head;
+//     array[1]=head1;
+//     array[2]=head2;
+//     array[3]=head3;
+//     array[4]=head5;
+
+//     display(mergeKLists(array,n));
+
+//     return 0;
+// }
+int main() {
+    int n;
+    int val;
+    int len;
+    scanf("%d", &n);
+
+    struct ListNode** array = (struct ListNode**)malloc(n * sizeof(struct ListNode*));
+    struct ListNode* tempHead = NULL;
     for(int i=0;i<n;i++)
     {
-        array[i]=(struct ListNode*)malloc(5*sizeof(struct ListNode));
+        array[i]=NULL;
     }
-
-    struct ListNode* head = NULL;
-    insert(&head,5);
-    insert(&head,6);
-    insert(&head,7);
-    insert(&head,8);
-    insert(&head,9);
-
-    struct ListNode* head1 = NULL;
-    insert(&head1,1);
-    insert(&head1,2);
-    insert(&head1,3);
-    insert(&head1,4);
-    insert(&head1,5);
-
-    struct ListNode* head2 = NULL;
-    insert(&head2,10);
-    insert(&head2,20);
-    insert(&head2,30);
-    insert(&head2,40);
-    insert(&head2,50);
-
-    struct ListNode* head3 = NULL;
-    insert(&head3,15);
-    insert(&head3,25);
-    insert(&head3,35);
-    insert(&head3,45);
-    insert(&head3,55);
-
-    struct ListNode* head4 = NULL;
-    insert(&head4,3);
-    insert(&head4,6);
-    insert(&head4,9);
-    insert(&head4,12);
-    insert(&head4,15);
-
-    struct ListNode* head5 = NULL;
-    insert(&head5,100);
-    insert(&head5,200);
-    insert(&head5,300);
-    insert(&head5,400);
-    insert(&head5,500);
-
-    // display(merge(&head5,&head1));
-    array[0]=head;
-    array[1]=head1;
-    array[2]=head2;
-    array[3]=head3;
-    array[4]=head5;
-
-    display(mergeKLists(array,n));
+    for (int i = 0; i < n; i++) { 
+        scanf("%d", &len);
+        for (int j = 0; j < len; j++) {
+            scanf("%d", &val);
+            insert(&array[i], val);
+        }
+    }
+    display(mergeKLists(array, n));
 
     return 0;
 }
