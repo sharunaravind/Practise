@@ -3,50 +3,20 @@
 #include <time.h>
 
 int totCount=0;
-int countPair(int low,int mid,int high,int* arr)
+int countPair(int low, int mid, int high, int* arr)
 {
-    int i = low;
+    int count = 0;
     int j = mid;
-    int count=0;
-    while(i<mid && j<high)
-    {
-        if(j<high && (long long)arr[i] > 2LL * arr[j])
-        {
-            count++;
-            // temp=count;
+
+    for (int i = low; i < mid; i++) {
+        while (j < high && (long long)arr[i] > 2LL * arr[j]) {
             j++;
         }
-        else 
-        {
-            i++;
-            if(i<mid) count+=(j-mid);
-        }
+        count += (j - mid);
     }
-    if(i==mid)
-    {
-        return count;
-    }
-    else
-    {
-        count*=(mid-i);
-    }
+
     return count;
 }
-
-// int countPair(int low, int mid, int high, int* arr)
-// {
-//     int count = 0;
-//     int j = mid;
-
-//     for (int i = low; i < mid; i++) {
-//         while (j < high && (long long)arr[i] > 2LL * arr[j]) {
-//             j++;
-//         }
-//         count += (j - mid);
-//     }
-
-//     return count;
-// }
 
 
 void merge(int low,int mid,int high,int* arr)
